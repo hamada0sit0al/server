@@ -2,12 +2,30 @@
 <html>
     <head>
         <script type="text/javascript">
+            setTimeout("location.reload()",1000)
             const updateLux = async(url, element) => {
                  const sensorData = await fetch(url).then(response => response.text())
                  const target = document.getElementById(element)
                  target.innerHTML = `<h1>${sensorData}</h1>`
+           }
+        </script>
+        <script type="text/javascript">
+           window.onload = function() {
+               var chart = new CanvasJS.Chart("chartContainer",
+               {
+                   title: {text: "lux"},
+                data: [
+                {
+                   type: 'line',
+                   dataPoints: [
+                       {x:0, y: 200},
+                       {x:10, y: 195}
+                    ]
+                }
+                ]
+                });
+             chart.render();
             }
-            setInterval("updateLux('/lux', 'data')",3000)
         </script>
         <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js">    
         </script>   
@@ -16,28 +34,7 @@
     <body onLoad="updateLux('/lux', 'data')">
         <div id = "data">test</div>
         <input type="button" value="更新" onclick="updateLux('/lux', 'data')">
-        <div id="chartContainer" style="height:300px; width:100%;"></div>
-
-        <script type="text/javascript">
-            window.onload = function() {
-                var chart = new CanvasJS.Chart("chartContainer",
-                {
-                    title: {text: "lux"},
-                 data: [
-                 {
-                    type: 'line',
-                    dataPoints: [
-                        {x:0, y: 200},
-                        {x:10, y: 195}
-                     ]
-                 }
-                 ]
-                 });
-              chart.render();
-            }
-         </script>
-
-        <h4>test-test</h4>   
+        <div id="chartContainer" style="height:300px; width:100%;"></div>   
     </body>   
     </center> 
 </html>
