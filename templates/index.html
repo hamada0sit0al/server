@@ -2,42 +2,76 @@
 <html>
     <head>
         <script type="text/javascript">
-            const updateLux = async(url, element) => {
+            const updateSecond = async(url, element) => {
                  const sensorData = await fetch(url).then(response => response.text())
                  const target = document.getElementById(element)
                  target.innerHTML = `<h1>${sensorData}</h1>`
             }
-            setInterval("updateLux('/lux', 'data')",3000)
+            
+            setInterval("updateSecond('/second', 'date')",3000)
         </script>
-        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js">    
-        </script>   
+           
     </head>   
     <center>
-    <body onLoad="updateLux('/lux', 'data')">
-        <div id = "data">test</div>
-        <input type="button" value="更新" onclick="updateLux('/lux', 'data')">
-        <div id="chartContainer" style="height:300px; width:100%;"></div>
+    <body onLoad="updateSecond('/second', 'date')">
+        <h1>在席時間表示システム</h1>
+        <div id = "date">test</div>
+
+        <input type="button" value="更新" onclick="updateLux('/pascal', 'data')"></input>
+
+<!---
+
+        <canvas id="myChart"></canvas>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
         <script type="text/javascript">
-            window.onload = function() {
-                var chart = new CanvasJS.Chart("chartContainer",
-                {
-                    title: {text: "lux"},
-                 data: [
-                 {
-                    type: 'line',
-                    dataPoints: [
-                        {x:0, y: 200},
-                        {x:10, y: 195}
-                     ]
-                 }
-                 ]
-                 });
-              chart.render();
-            }
-         </script>
+            var ctx = document.getElementById('myChart').getContext('2d');
 
-        <h4>test-test</h4>   
+            var chart = new Chart(ctx, {
+                type: 'line',               
+                data: {
+                    datasets: [{
+                        data: []            
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'bar'    
+                        }],
+                        yAxes: [
+                            {
+                                ticks: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: 12
+                                }
+                            }
+                        ]
+                    },
+                    plugins: {
+                        streaming: {            
+                            duration: 2,    
+                            refresh: 1000,      
+                            delay: 1000,        
+                            frameRate: 30,      
+                            pause: false,       
+
+
+                            onRefresh: function(chart) {
+                                chart.data.datasets[0].data.push({
+                                    x: Date.now(),
+                                    y: Math.random() * 100
+                                });
+                            }
+                        }
+                    }
+                }
+            }); 
+        </script>   --->
+
+        <h4></h4>   
     </body>   
     </center> 
 </html>
